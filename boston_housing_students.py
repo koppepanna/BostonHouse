@@ -168,12 +168,13 @@ def fit_predict_model(city_data):
 	# 1. Find the best performance metric
 	# should be the same as your performance_metric procedure
 	# http://scikit-learn.org/stable/modules/generated/sklearn.metrics.make_scorer.html
-
+	
 
 	# 2. Use gridearch to fine tune the Decision Tree Regressor and find the best model
 	# http://scikit-learn.org/stable/modules/generated/sklearn.grid_search.GridSearchCV.html#sklearn.grid_search.GridSearchCV
-	grsrch  = GridSearchCV(regressor, parameters, cv = 10)
+	grsrch  = GridSearchCV(regressor, parameters,scoring = 'mean_squared_error', cv = 10)
 	grsrch.fit(X,y)
+	print grsrch.grid_scores_
 
 	reg = grsrch.best_estimator_
     
