@@ -9,11 +9,7 @@ from sklearn import datasets
 from sklearn.metrics import mean_squared_error
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.cross_validation import train_test_split
-
-################################
-### ADD EXTRA LIBRARIES HERE ###
-################################
-
+from sklearn.grid_search import GridSearchCV
 
 def load_data():
 	'''Load the Boston dataset.'''
@@ -33,14 +29,6 @@ def explore_city_data(city_data):
 	### Step 1. YOUR CODE GOES HERE ###
 	###################################
 
-	# Please calculate the following values using the Numpy library
-	# Size of data?
-	# Number of features?
-	# Minimum value?
-	# Maximum Value?
-	# Calculate mean?
-	# Calculate median?
-	# Calculate standard deviation?
 	print "size_features"
 	print np.shape(housing_features)
 	print "size "
@@ -181,10 +169,15 @@ def fit_predict_model(city_data):
 	# should be the same as your performance_metric procedure
 	# http://scikit-learn.org/stable/modules/generated/sklearn.metrics.make_scorer.html
 
+
 	# 2. Use gridearch to fine tune the Decision Tree Regressor and find the best model
 	# http://scikit-learn.org/stable/modules/generated/sklearn.grid_search.GridSearchCV.html#sklearn.grid_search.GridSearchCV
+	grsrch  = GridSearchCV(regressor, parameters, cv = 10)
+	grsrch.fit(X,y)
 
-	# Fit the learner to the training data
+	reg = grsrch.best_estimator_
+    
+    # Fit the learner to the training data
 	print "Final Model: "
 	print reg.fit(X, y)
     
